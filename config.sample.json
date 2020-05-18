@@ -1,0 +1,76 @@
+{
+    "screens": {
+        "A": "Color LCD",
+        "B": "DELL ABC"
+    },
+    "tunnelblick": {
+        "connection": "",
+        "username": "",
+        "password": ""
+    },
+    "myip": "http://icanhazip.com",
+    "layouts": [
+        {
+            "names": ["com.googlecode.iterm2", "Terminal", "Termius"],
+            "modes": {
+              "A" : [null, "Turkish Q", 2, 2, 0, 1],
+              "B" : [null, "U.S.", 2, 3, 1, 2],
+              "AB": ["A", "U.S.", 1, 10, 0, 1, 1, 8]
+            }
+        },
+        {
+            "names": ["com.apple.iChat", "Reminders", "Notes"],
+            "modes": {
+              "A" : [null, "Turkish Q", 2, 2, 0, 1],
+              "B" : [null, "Turkish Q", 3, 4, 0, 3],
+              "AB": ["A", "Turkish Q", 2, 2, 0, 1]
+            }
+        },
+        {
+            "names": ["Mail", "Calendar"],
+            "modes": {
+              "A" : [null, "Turkish Q", 2, 2, 0, 1],
+              "B" : [null, "Turkish Q", 2, 3, 0, 2],
+              "AB": ["A", "Turkish Q", 1, 10, 0, 1, 1, 8]
+            }
+        },
+        {
+            "names": ["Safari", "Firefox", "Brave Browser", "MacVim", "ForkLift", "Google Chrome"],
+            "modes": {
+              "A" : [null, "Turkish Q", 2, 2, 0, 1],
+              "B" : [null, "U.S.", 2, 3, 0, 2],
+              "AB": ["A", "U.S.", 1, 10, 0, 1, 1, 8]
+            }
+        },
+        {
+            "names": ["Visual Studio Code", "Code", "Xcode"],
+            "modes": {
+              "A" : [null, "Turkish Q", 2, 2, 0, 0],
+              "B" : [null, "U.S.", 1, 3, 0, 0, 1, 2],
+              "AB": ["B", "U.S.", 1, 3, 0, 0, 1, 2]
+            }
+        }
+    ],
+    "applications": {
+      "c++": [
+        "iTerm",
+        "Safari",
+        "MacVim",
+        "Xcode",
+        "Mail",
+        "ForkLift",
+        "Google Chrome"
+      ],
+      "web": [
+        "Docker",
+        "iTerm",
+        "Safari",
+        "MacVim",
+        "Visual Studio Code",
+        "Code",
+        "Mail",
+        "ForkLift",
+        "Google Chrome"
+      ]
+    }
+}
