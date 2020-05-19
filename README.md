@@ -2,15 +2,17 @@
 
 My personal [Hammerspoon](http://www.hammerspoon.org) configuration which supports both regular and the [tmux](https://github.com/tmux/tmux) style key bindings.
 
+Addition to the key bindings, the script automatically moves application windows to specified screen, adjust their dimensions, placements and keyboard locale based on the configuration. Screen connect or disconnect and new application launch events trigger and focus change events trigger related update tasks.
+
 ## Configuration
 The `config.json` file includes almost all configurations parameters. The exception is the list of key bindings.
 
 **`screens`:** The list of of available screens with unique keys. The keys will be referenced at the `layout` options.
 ```json
-    "screens": {
-        "A": "Color LCD",
-        "B": "DELL ABC"
-    }
+    "screens": [
+        {"key": "A", "name": "Color LCD"},
+        {"key": "B", "name": "DELL UP3216Q"}
+    ]
 ```
 
 **`layouts`:** The list of application layouts for different screen configurations. Each group defines same size and placement option for all applications listed on same screen.
@@ -18,8 +20,8 @@ The `config.json` file includes almost all configurations parameters. The except
     {
         "names": ["com.googlecode.iterm2", "Terminal", "Termius"],
         "modes": {
-            "A" : [null, "Turkish Q", 2, 2, 0, 1],
-            "B" : [null, "U.S.", 2, 3, 1, 2],
+            "A" : ["", "Turkish Q", 2, 2, 0, 1],
+            "B" : ["", "U.S.", 2, 3, 1, 2],
             "AB": ["A", "U.S.", 1, 10, 0, 1, 1, 8]
         }
     }
