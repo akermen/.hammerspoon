@@ -94,9 +94,13 @@ function next_screen()
   local app = win:application()
   local appName = app:name()
   local screen = win:screen()
-  local layoutMode = get_app_layout(appName, app:bundleID())
-  win:moveToScreen(screen:next())
-  set_win_layout(layoutMode, win)
+  local nextScreen = screen:next()
+  local currentMode = get_screen_mode(nextScreen)
+  win:moveToScreen(nextScreen)
+  local layoutMode = get_app_layout(appName, app:bundleID(), currentMode)
+  if (layoutMode) then
+    set_win_layout(layoutMode, win)
+  end
 end
 -------------------------------------------------------------------------------
 function previous_screen()
@@ -108,12 +112,21 @@ end
 function get_current_mode()
   local currentMode = ""
   for key, value in pairs(config.screens) do
-    if hs.screen.findByName(value) ~= nil then
-      currentMode = currentMode .. key
+    if hs.screen.findByName(value["name"]) ~= nil then
+      currentMode = currentMode .. value["key"]
     end
   end
 
   return currentMode
+end
+-------------------------------------------------------------------------------
+function get_screen_mode(screen)
+  for key, value in pairs(config.screens) do
+    if (screen:name() == value["name"]) then
+      return value["key"]
+    end
+  end
+  return nil
 end
 -------------------------------------------------------------------------------
 function apply_layouts()
@@ -127,7 +140,7 @@ function apply_layouts()
       for _, name in ipairs(layout.names) do
         local app = hs.application.find(name)
         if (app) then
-          set_app_layout(name, app)
+          set_app_layout(name, app, currentMode)
         end
       end
     end
@@ -160,8 +173,8 @@ function set_app_locale(appName, app)
   end
 end
 -------------------------------------------------------------------------------
-function get_app_layout(appName, bundleID)
-  local currentMode = get_current_mode()
+function get_app_layout(appName, bundleID, currentMode)
+  currentMode = currentMode or get_current_mode()
 
   for _, layout in ipairs(config.layouts) do
     local layoutMode = layout.modes[currentMode]
@@ -178,12 +191,12 @@ function get_app_layout(appName, bundleID)
 end
 -------------------------------------------------------------------------------
 function set_win_layout(layoutMode, win)
-  local rows   = layoutMode[2]
-  local cols   = layoutMode[3]
-  local row    = layoutMode[4]
-  local col    = layoutMode[5]
-  local rs     = layoutMode[6]
-  local cs     = layoutMode[7]
+  local rows   = layoutMode[3]
+  local cols   = layoutMode[4]
+  local row    = layoutMode[5]
+  local col    = layoutMode[6]
+  local rs     = layoutMode[7]
+  local cs     = layoutMode[8]
 
   if (win:isVisible()) then
     grid(win, rows, cols, row, col, rs, cs)
@@ -191,17 +204,26 @@ function set_win_layout(layoutMode, win)
 
 end
 -------------------------------------------------------------------------------
+function get_screen_name(key)
+  for _, value in pairs(config.screens) do
+    if (key == value["key"]) then
+      return value["name"]
+    end
+  end
+  return nil
+end
+-------------------------------------------------------------------------------
 function set_app_layout(appName, app)
 
   local layoutMode = get_app_layout(appName, app:bundleID())
-  local pos = layoutMode[0]
+  local pos = layoutMode[1]
 
   if (layoutMode) then
     if (app) then
       local wins = app:allWindows()
       for j, win in ipairs(wins) do
         if (#hs.screen.allScreens() > 1) then
-          win:moveToScreen(hs.screen.get(config.screens[pos]))
+          win:moveToScreen(hs.screen.get(get_screen_name(pos)))
         end
         set_win_layout(layoutMode, win)
       end
