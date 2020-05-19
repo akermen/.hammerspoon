@@ -155,7 +155,9 @@ end
 -------------------------------------------------------------------------------
 function set_app_locale(appName, app)
   local locale = get_locale(appName, app:bundleID())
-  hs.keycodes.setLayout(locale)
+  if locale ~= nil then
+    hs.keycodes.setLayout(locale)
+  end
 end
 -------------------------------------------------------------------------------
 function get_app_layout(appName, bundleID)
