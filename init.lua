@@ -154,7 +154,7 @@ function get_locale(appName, bundleID)
   for _, layout in ipairs(config.layouts) do
     local layoutMode = layout.modes[currentMode]
     if layoutMode ~= nil then
-      local locale = layoutMode[1]
+      local locale = layoutMode[2]
       for _, name in ipairs(layout.names) do
         if (name == appName or name == bundleID) then
           return locale
@@ -216,16 +216,18 @@ end
 function set_app_layout(appName, app)
 
   local layoutMode = get_app_layout(appName, app:bundleID())
-  local pos = layoutMode[1]
-
   if (layoutMode) then
-    if (app) then
-      local wins = app:allWindows()
-      for j, win in ipairs(wins) do
-        if (#hs.screen.allScreens() > 1) then
-          win:moveToScreen(hs.screen.get(get_screen_name(pos)))
+    local pos = layoutMode[1]
+
+    if (layoutMode) then
+      if (app) then
+        local wins = app:allWindows()
+        for j, win in ipairs(wins) do
+          if (#hs.screen.allScreens() > 1) then
+            win:moveToScreen(hs.screen.get(get_screen_name(pos)))
+          end
+          set_win_layout(layoutMode, win)
         end
-        set_win_layout(layoutMode, win)
       end
     end
   end
