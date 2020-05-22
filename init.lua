@@ -138,7 +138,7 @@ function apply_layouts()
     local layoutMode = layout.modes[currentMode]
     if layoutMode ~= nil then
       for _, name in ipairs(layout.names) do
-        local app = hs.application.find(name)
+        local app = hs.application.get(name)
         if (app) then
           set_app_layout(name, app, currentMode)
         end
@@ -284,8 +284,10 @@ function on_created_window(win)
   local app = win:application()
   local appName = app:name()
   local layoutMode = get_app_layout(appName, app:bundleID())
-  if (#app:allWindows() == 1) then
-    set_win_layout(layoutMode, win)
+  if (layoutMode) then
+    if (#app:allWindows() == 1) then
+      set_win_layout(layoutMode, win)
+    end
   end
 end
 -------------------------------------------------------------------------------
@@ -375,7 +377,7 @@ function applicationWatcher(appName, eventType, appObject)
     set_app_locale(appName, appObject)
   end
   if (eventType == hs.application.watcher.launched) then
-    set_app_layout(appName, appObject)
+    hs.timer.doAfter(0.25, function() set_app_layout(appName, appObject) end)
   end
 end
 appWatcher = hs.application.watcher.new(applicationWatcher)
