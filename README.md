@@ -34,8 +34,8 @@ The first element of the mode array is preferred screen which is used only for m
 - number of grid columns for selected screen
 - row index where application window's left-top corner located
 - column index where application window's left-top corner located
-- row width, how wide is applicaton window
-- column width, how tall is applicaton window
+- row width, how wide is application window
+- column width, how tall is application window
 
 **`applications`:** The list of different workspace applications to be launched using single macro (key binding).
 
@@ -47,7 +47,7 @@ The first element of the mode array is preferred screen which is used only for m
 ## Key bindings
 Regular key bindings require each key is pressed at the same time such as <kbd>⌘</kbd> <kbd>⌥</kbd> <kbd>↵</kbd> for fullscreen. The [tmux](https://github.com/tmux/tmux) style is a little bit different where the first key combination <kbd>⌥</kbd> <kbd>space</kbd> enables a modal mode where second key press triggers the action. For same fullscreen action first <kbd>⌥</kbd> <kbd>space</kbd> is pessed and then <kbd>↵</kbd>.
 
-Altough this two step may seem inefficient compared to the regular method, by freeing almost all the keys on the keyboard after modal mode is activated it brings usuability and compatibility advantages for certain use cases especially when many different actions triggered without overriding or conflicting existing key combinations on the operating system or installed applications.
+Although this two step may seem inefficient compared to the regular method, by freeing almost all the keys on the keyboard after modal mode is activated it brings usability and compatibility advantages for certain use cases especially when many different actions triggered without overriding or conflicting existing key combinations on the operating system or installed applications.
 
 
 | Modifier     | Key              | Action                   |

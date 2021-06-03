@@ -434,6 +434,7 @@ local key_maps = {
     ["s"]       = middle_1_3_small,
     ["d"]       = right_1_3_small,
     [","]       = left_half,
+    [";"]       = left_half,
     ["."]       = right_half,
     ["["]       = top_left_2_2,
     ["]"]       = top_right_2_2,
